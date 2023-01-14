@@ -13,13 +13,13 @@ import java.util.List;
 public interface OgretmenRepository extends JpaRepository<Ogretmen, Long> {
 
     // derived query
-    public List<Ogretmen> findAllByAdLike(String ad, Sort sort);
+    List<Ogretmen> findAllByAdLike(String ad, Sort sort);
 
-    public List<Ogretmen> findAllByAdLikeOrderByAdAsc(String ad);
+    List<Ogretmen> findAllByAdLikeOrderByAdAsc(String ad);
 
-    public List<Ogretmen> findByAdLike(String ad);
+    List<Ogretmen> findByAdLike(String ad);
 
     // yanlış query yazarak strack trace 'e bakılabilir
     @Query(name = "findByOgretmenAd", value = "SELECT * FROM springboot.ogretmen WHERE Ad LIKE %:ad% order by ad asc", nativeQuery = true)
-    public List<Ogretmen> searchByAd(@Param("ad") String ad);
+    List<Ogretmen> searchByAd(@Param("ad") String ad);
 }

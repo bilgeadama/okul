@@ -22,6 +22,7 @@ public class Ders {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "OGRETMEN_FK"))
+    @ToString.Exclude
     private Ogretmen ogretmen;
 
 //    @ManyToOne(fetch = FetchType.LAZY)
@@ -29,9 +30,11 @@ public class Ders {
 //    private Ogrenci ogrenci;
 
     @OneToMany(mappedBy = "ders", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @ToString.Exclude
     private Set<Konu> konular;
 
     @OneToMany(mappedBy = "ders", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @ToString.Exclude
     private Set<DersOgrenci> dersOgrenciler;
 
 }
