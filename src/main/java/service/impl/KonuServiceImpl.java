@@ -2,6 +2,7 @@ package service.impl;
 
 import dto.KonuDto;
 import entity.Konu;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import repository.KonuRepository;
 import service.KonuService;
@@ -24,7 +25,7 @@ public class KonuServiceImpl implements KonuService {
         List<KonuDto> konuDtoList = new ArrayList<>();
         konuRepository.findAll().forEach(konu -> {
             KonuDto konuDto = new KonuDto();
-//            BeanUtils.copyProperties(konu, konuDto);
+            BeanUtils.copyProperties(konu, konuDto);
             entityToDto(konu, konuDto);
             konuDtoList.add(konuDto);
         });
@@ -64,7 +65,7 @@ public class KonuServiceImpl implements KonuService {
         Konu konu = new Konu();
         dtoToEntity(konuDto, konu);
         konu = konuRepository.save(konu);
-        entityToDto(konu,konuDto);
+        entityToDto(konu, konuDto);
         return konuDto;
     }
 

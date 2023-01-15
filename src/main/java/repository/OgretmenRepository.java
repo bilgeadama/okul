@@ -19,7 +19,6 @@ public interface OgretmenRepository extends JpaRepository<Ogretmen, Long> {
 
     List<Ogretmen> findByAdLike(String ad);
 
-    // yanlış query yazarak strack trace 'e bakılabilir
     @Query(name = "findByOgretmenAd", value = "SELECT * FROM springboot.ogretmen WHERE Ad LIKE %:ad% order by ad asc", nativeQuery = true)
     List<Ogretmen> searchByAd(@Param("ad") String ad);
 }

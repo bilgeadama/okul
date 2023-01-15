@@ -13,8 +13,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import java.util.Arrays;
-
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"controller", "repository", "service", "entity"})
@@ -27,7 +25,7 @@ public class App {
     public static void main(String[] args) {
 
         ApplicationContext applicationContext = SpringApplication.run(App.class, args);
-        Arrays.stream(applicationContext.getBeanDefinitionNames()).forEach(s -> System.out.println(s.toUpperCase()));
+//        Arrays.stream(applicationContext.getBeanDefinitionNames()).forEach(s -> System.out.println(s.toUpperCase()));
 
     }
 }

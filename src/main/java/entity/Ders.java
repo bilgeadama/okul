@@ -17,7 +17,7 @@ public class Ders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false,length = 20)
+    @Column(nullable = false, length = 20)
     private String dersAdi;
 
     @ManyToOne(fetch = FetchType.LAZY)

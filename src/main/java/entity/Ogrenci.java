@@ -19,7 +19,7 @@ public class Ogrenci {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false,length = 50)
+    @Column(nullable = false, length = 50)
     private String ad;
 
     @Column(unique = true)
@@ -28,6 +28,6 @@ public class Ogrenci {
     @Column(length = 2)
     private long yas;
 
-    @OneToMany(mappedBy = "ogrenci",cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "ogrenci", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private Set<DersOgrenci> dersOgrenciler;
 }

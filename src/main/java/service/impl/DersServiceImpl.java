@@ -3,6 +3,7 @@ package service.impl;
 import dto.DersDto;
 import dto.KonuDto;
 import entity.Ders;
+import entity.DersOgrenci;
 import entity.Konu;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -19,11 +20,12 @@ public class DersServiceImpl implements DersService {
 
     private final DersRepository dersRepository;
     private final KonuServiceImpl konuService;
-//    private final DersOgrenciServiceImpl dersOgrenciService;
+    private final DersOgrenciServiceImpl dersOgrenciService;
 
-    public DersServiceImpl(DersRepository dersRepository, KonuServiceImpl konuService) {
+    public DersServiceImpl(DersRepository dersRepository, KonuServiceImpl konuService, DersOgrenciServiceImpl dersOgrenciService) {
         this.dersRepository = dersRepository;
         this.konuService = konuService;
+        this.dersOgrenciService = dersOgrenciService;
     }
 
     @Override
@@ -86,10 +88,26 @@ public class DersServiceImpl implements DersService {
                 Konu konu = new Konu();
                 konuService.dtoToEntity(konuDto, konu);
 
+//                if (CollectionUtils.isEmpty(ders.getKonular()))
+//                    ders.setKonular(new HashSet<>());
+                konu.setDers(ders);
                 if (CollectionUtils.isEmpty(ders.getKonular()))
                     ders.setKonular(new HashSet<>());
-                konu.setDers(ders);
                 ders.getKonular().add(konu);
+            });
+        }
+
+        if (!CollectionUtils.isEmpty(dersDto.getDersOgrenciler())) {
+            dersDto.getDersOgrenciler().forEach(dersOgrenciDto -> {
+                DersOgrenci dersOgrenci = new DersOgrenci();
+                dersOgrenciService.dtoToEntity(dersOgrenciDto, dersOgrenci);
+
+//                if (CollectionUtils.isEmpty(ders.getKonular()))
+//                    ders.setKonular(new HashSet<>());
+                dersOgrenci.setDers(ders);
+                if (CollectionUtils.isEmpty(ders.getDersOgrenciler()))
+                    ders.setDersOgrenciler(new HashSet<>());
+                ders.getDersOgrenciler().add(dersOgrenci);
             });
         }
     }

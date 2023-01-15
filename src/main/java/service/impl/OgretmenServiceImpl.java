@@ -39,8 +39,8 @@ public class OgretmenServiceImpl implements OgretmenService {
     @Override
     public Optional<OgretmenDto> getById(long id) {
         Optional<OgretmenDto> ogretmenDto = Optional.of(new OgretmenDto());
-        Ogretmen ogretmen = ogretmenRepository.findById(id).orElseThrow(()->new RuntimeException("Ogretmen Bulunamadı"));
-        entityToDto(ogretmen,ogretmenDto.get());
+        Ogretmen ogretmen = ogretmenRepository.findById(id).orElseThrow(() -> new RuntimeException("Ogretmen Bulunamadı"));
+        entityToDto(ogretmen, ogretmenDto.get());
         return ogretmenDto;
     }
 
@@ -49,7 +49,7 @@ public class OgretmenServiceImpl implements OgretmenService {
         Ogretmen ogretmen = new Ogretmen();
         dtoToEntity(ogretmenDto, ogretmen);
         ogretmen = ogretmenRepository.save(ogretmen);
-        entityToDto(ogretmen,ogretmenDto);
+        entityToDto(ogretmen, ogretmenDto);
         return ogretmenDto;
     }
 
@@ -66,7 +66,7 @@ public class OgretmenServiceImpl implements OgretmenService {
         optionalogretmen.get().setAd(ogretmenDto.getAd());
         Ogretmen ogretmen = new Ogretmen();
         dtoToEntity(ogretmenDto, ogretmen);
-        entityToDto(ogretmenRepository.save(ogretmen),ogretmenDto);
+        entityToDto(ogretmenRepository.save(ogretmen), ogretmenDto);
         return ogretmenDto;
     }
 
@@ -77,11 +77,11 @@ public class OgretmenServiceImpl implements OgretmenService {
         ogretmen.setYas(ogretmenDto.getYas());
         ogretmen.setGicik(ogretmenDto.isGicik());
 
-        if(!CollectionUtils.isEmpty(ogretmenDto.getDersler())){
+        if (!CollectionUtils.isEmpty(ogretmenDto.getDersler())) {
             ogretmenDto.getDersler().forEach(dersDto -> {
                 Ders ders = new Ders();
-                dersService.dtoToEntity(dersDto,ders);
-                if(CollectionUtils.isEmpty(ogretmen.getDersler()))
+                dersService.dtoToEntity(dersDto, ders);
+                if (CollectionUtils.isEmpty(ogretmen.getDersler()))
                     ogretmen.setDersler(new HashSet<>());
                 ders.setOgretmen(ogretmen);
                 ogretmen.getDersler().add(ders);
@@ -97,13 +97,13 @@ public class OgretmenServiceImpl implements OgretmenService {
         ogretmenDto.setGicik(ogretmen.isGicik());
 
 
-        if(!CollectionUtils.isEmpty(ogretmen.getDersler()))
-        ogretmen.getDersler().forEach(ders -> {
-            DersDto dersDto = new DersDto();
-            dersService.entityToDto(ders,dersDto);
-            if(CollectionUtils.isEmpty(ogretmenDto.getDersler()))
-                ogretmenDto.setDersler(new HashSet<>());
-            ogretmenDto.getDersler().add(dersDto);
-        });
+        if (!CollectionUtils.isEmpty(ogretmen.getDersler()))
+            ogretmen.getDersler().forEach(ders -> {
+                DersDto dersDto = new DersDto();
+                dersService.entityToDto(ders, dersDto);
+                if (CollectionUtils.isEmpty(ogretmenDto.getDersler()))
+                    ogretmenDto.setDersler(new HashSet<>());
+                ogretmenDto.getDersler().add(dersDto);
+            });
     }
 }

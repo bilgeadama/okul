@@ -1,9 +1,10 @@
 package entity;
 
 import jakarta.persistence.*;
-import lombok.*;
-
-import java.util.Set;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Setter
@@ -16,7 +17,7 @@ public class Konu {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(length = 200,nullable = false)
+    @Column(length = 200, nullable = false)
     private String ad;
 
     @ManyToOne(fetch = FetchType.LAZY)

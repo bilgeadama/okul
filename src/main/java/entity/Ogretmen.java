@@ -19,7 +19,7 @@ public class Ogretmen {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(length = 50,nullable = false)
+    @Column(length = 50, nullable = false)
     private String ad;
 
     @Column(nullable = false)
@@ -27,7 +27,7 @@ public class Ogretmen {
 
     private boolean gicik;
 
-    @OneToMany(mappedBy = "ogretmen",cascade = {CascadeType.REMOVE,CascadeType.MERGE,CascadeType.PERSIST})
+    @OneToMany(mappedBy = "ogretmen", cascade = {CascadeType.REMOVE, CascadeType.MERGE, CascadeType.PERSIST})
     private Set<Ders> dersler;
 
 }
